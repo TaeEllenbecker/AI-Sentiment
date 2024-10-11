@@ -1,6 +1,6 @@
 # AI Sentiment Program
 
-**This project takes text from an image using [nvidia/NVLM-D-72B from Hugging Face](https://huggingface.co/nvidia/NVLM-D-72B) and feeds it into an AI Sentiment model I created to analyse text from different posts such as Instagram, Twitter (X), etc.**
+**This project takes text from an image using [nvidia/NVLM-D-72B from Hugging Face](https://huggingface.co/nvidia/NVLM-D-72B) and feeds it into an AI Sentiment model I created to analyse text from different posts such as Instagram, Twitter (X), etc. The purpose of this program is to provide reliable and informaitonal feedback based on given text. Furthermore, to demonstrate using a pretrained model**
 
 
 ## Attribution
@@ -24,6 +24,7 @@ Dai, W., Lee, N., Wang, B., Yang, Z., Liu, Z., Barker, J., Rintamaki, T., Shoeyb
   journal={arXiv preprint},
   year={2024}}
 
+## Issues
 
 *Currently under development*
 
