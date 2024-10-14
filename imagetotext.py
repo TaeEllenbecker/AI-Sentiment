@@ -1,22 +1,48 @@
-'''
-If you use this project or build upon it, please cite the following paper:
+import os
 
-Plain Text:
+from huggingface_hub import hf_hub_download
 
-Dai, W., Lee, N., Wang, B., Yang, Z., Liu, Z., Barker, J., Rintamaki, T., Shoeybi, M., Catanzaro, B., & Ping, W. (2024). NVLM: Open Frontier-Class Multimodal LLMs. arXiv preprint.
+HUGGING_FACE_API_KEY = os.environ.get("HUGGING_FACE_API_KEY")
 
-BibTeX:
+model_id = "stepfun-ai/GOT-OCR2_0"
 
-BibTeX: @article{nvlm2024, title={NVLM: Open Frontier-Class Multimodal LLMs}, author={Dai, Wenliang and Lee, Nayeon and Wang, Boxin and Yang, Zhuolin and Liu, Zihan and Barker, Jon and Rintamaki, Tuomas and Shoeybi, Mohammad and Catanzaro, Bryan and Ping, Wei}, journal={arXiv preprint}, year={2024}}
-'''
+filenames = ["config.json","generation_config.json","got_vision_b.py","model.safetensors","modeling_GOT.py","qwen.tiktoken",
+"render_tools.py","special_tokens_map.json","tokenization_qwen.py","tokenizer_config.json"
+]
 
-import torch
-from transformers import AutoModel
+for filename in filenames:
+    downloaded_model_path = hf_hub_download(repo_id = model_id, filename = filename, token = HUGGING_FACE_API_KEY)
 
-path = "nvidia/NVLM-D-72B"
-model = AutoModel.from_pretrained(
-    path,
-    torch_dtype=torch.bfloat16,
-    low_cpu_mem_usage=True,
-    use_flash_attn=False,
-    trust_remote_code=True).eval()
+print(downloaded_model_path)
+
+
+from transformers import AutoModel, AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained('ucaslcl/GOT-OCR2_0', trust_remote_code=True)
+model = AutoModel.from_pretrained('ucaslcl/GOT-OCR2_0', trust_remote_code=True, low_cpu_mem_usage=True, device_map='cuda', use_safetensors=True, pad_token_id=tokenizer.eos_token_id)
+model = model.eval().cuda()
+
+
+# input your test image
+image_file = 'product-manager-business-card.jpg'
+
+# plain texts OCR
+res = model.chat(tokenizer, image_file, ocr_type='ocr')
+
+# format texts OCR:
+# res = model.chat(tokenizer, image_file, ocr_type='format')
+
+# fine-grained OCR:
+# res = model.chat(tokenizer, image_file, ocr_type='ocr', ocr_box='')
+# res = model.chat(tokenizer, image_file, ocr_type='format', ocr_box='')
+# res = model.chat(tokenizer, image_file, ocr_type='ocr', ocr_color='')
+# res = model.chat(tokenizer, image_file, ocr_type='format', ocr_color='')
+
+# multi-crop OCR:
+# res = model.chat_crop(tokenizer, image_file, ocr_type='ocr')
+# res = model.chat_crop(tokenizer, image_file, ocr_type='format')
+
+# render the formatted OCR results:
+# res = model.chat(tokenizer, image_file, ocr_type='format', render=True, save_render_file = './demo.html')
+
+print(res)
