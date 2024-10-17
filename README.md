@@ -1,6 +1,6 @@
 # AI Sentiment Program
 
-**This project takes text from an image using [Qwen/Qwen2-VL-7B-Instruct from Hugging Face]([https://huggingface.co/stepfun-ai/GOT-OCR2_0](https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct)) and feeds it into an AI Sentiment model I created to analyse text from different posts such as Instagram, Twitter (X), etc. The purpose of this program is to provide reliable and informaitonal feedback based on given text. Furthermore, to demonstrate using a pretrained model**
+**This project takes text from an image using [Qwen/Qwen2-VL-7B-Instruct from Hugging Face](https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct) and feeds it into an AI Sentiment model I created to analyse text from different posts such as Instagram, Twitter (X), etc. The purpose of this program is to provide reliable and informaitonal feedback based on given text. Furthermore, to demonstrate using a pretrained model**
 
 
 ## Citation
