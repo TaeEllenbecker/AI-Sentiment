@@ -29,7 +29,7 @@ messages = [
         "content": [
             {
                 "type": "image",
-                "image": "product-manager-business-card.jpg",
+                "image": "./assets/product-manager-business-card.jpg",
             },
             {"type": "text", "text": "Output only the text on the screen."},
         ],
